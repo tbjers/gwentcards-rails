@@ -5,6 +5,7 @@ gem 'rails', '4.2.3'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
+gem 'dotenv-rails', :groups => [:development, :test]
 gem 'mongoid', '~> 5.0.0'
 gem 'devise'
 gem 'grape'
@@ -16,8 +17,6 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'sucker_punch', '~> 1.0'
 gem 'rollbar', '~> 2.1.1'
 gem 'rails_12factor'
-gem 'dotenv'
-gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 group :development, :test do
   gem 'rspec-rails'

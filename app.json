@@ -1,0 +1,7 @@
+{
+  "name": "GwentCards",
+  "description": "Manage RPG campaigns from anywhere",
+  "image": "heroku/ruby",
+  "repository": "https://bitbucket.org/tbjers/gwentcards-rails",
+  "keywords": ["ruby", "rails", "rpg", "markdown"]
+}

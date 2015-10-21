@@ -87,6 +87,9 @@ GEM
     docile (1.1.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (1.0.2)
+    dotenv-deployment (0.3.0)
+      dotenv (~> 1.0)
     equalizer (0.0.11)
     erubis (2.7.0)
     factory_girl (4.5.0)
@@ -293,6 +296,8 @@ DEPENDENCIES
   capistrano3-puma
   coveralls
   devise
+  dotenv
+  dotenv-deployment
   factory_girl_rails
   faker
   grape

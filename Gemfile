@@ -16,6 +16,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'sucker_punch', '~> 1.0'
 gem 'rollbar', '~> 2.1.1'
 gem 'rails_12factor'
+gem 'dotenv'
+gem 'dotenv-deployment', require: 'dotenv/deployment'
 
 group :development, :test do
   gem 'rspec-rails'

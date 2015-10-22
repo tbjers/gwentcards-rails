@@ -9,7 +9,7 @@ Powered by Rails, Grape, Swagger and Mongo.
 ### Requirements
 
 * Ruby 2.2.2
-* MongoDB 2.6.x
+* MongoDB 3.0.x
 
 ### Setup
 

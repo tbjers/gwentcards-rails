@@ -106,3 +106,5 @@ Adhering to the following process is the best way to get your work included in t
    ```
 7. [Open a Pull Request](https://help.github.com/articles/using-pull-requests/)
     with a clear title and description.
+
+One day we will have all the Gwent cards. I swear.

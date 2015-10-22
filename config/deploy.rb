@@ -20,8 +20,9 @@ set :puma_error_log,  "#{release_path}/log/puma.error.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub ~/.ssh/gwentcards-deploy.pem) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
-set :puma_init_active_record, false  # Change to false when not using ActiveRecord
-set :linked_files,    %w{.env}
+set :puma_init_active_record, false
+set :linked_files, fetch(:linked_files, []).push('.env')
+
 
 ## Defaults:
 # set :scm,           :git
@@ -74,7 +75,6 @@ namespace :deploy do
   end
 
   before :starting,     :check_revision
-  after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end

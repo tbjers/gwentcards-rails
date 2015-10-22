@@ -1,6 +1,6 @@
 server 'gwentcards.rpgcamp.com', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@bitbucket.org:tbjers/gwentcards-rails.git'
+set :repo_url,        'git@github.com:tbjers/gwentcards-rails.git'
 set :application,     'gwentcards'
 set :user,            'deploy'
 set :puma_threads,    [4, 16]

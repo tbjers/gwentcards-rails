@@ -6,27 +6,31 @@ module API
     end
     error_formatter :json, API::ErrorFormatter
 
+    get '/error' do
+      raise PageAccessDenied
+    end
+
     resource '' do
       desc 'Authenticate user and return user object / access token'
       params do
-        requires :email, type: String, desc: 'User email'
-        requires :password, type: String, desc: 'User password'
+        optional :email, type: String, desc: 'User email'
+        optional :password, type: String, desc: 'User password'
       end
       post do
         email = params[:email]
         password = params[:password]
 
         if email.nil? || password.nil?
-          error!({ error_code: 404, error_message: 'Invalid Email or Password' }, 401)
+          error!({ error_code: 401, error_message: 'Invalid Email or Password' }, 401)
         end
 
         user = User.find_by(email: email.downcase)
         if user.nil?
-          error!({ error_code: 404, error_message: 'Invalid Email or Password' }, 401)
+          error!({ error_code: 401, error_message: 'Invalid Email or Password' }, 401)
         end
 
         if !user.valid_password?(password)
-          error!({ error_code: 404, error_message: 'Invalid Email or Password' }, 401)
+          error!({ error_code: 401, error_message: 'Invalid Email or Password' }, 401)
         else
           user.ensure_authentication_token!
           user.save

@@ -24,14 +24,19 @@ RSpec.describe 'API:V1:Authentication', type: :request do
       get '/v1/factions', nil, 'HTTP_AUTHORIZATION': 'Bearer ' + @user.authentication_token
       expect(response).to be_success
     end
+    it 'should rescue from a raised error' do
+      get '/sessions/error'
+      expect(response).to have_http_status(500)
+      expect(json['error']).to eq('NameError')
+    end
+    it 'should report an error for missing parameters' do
+      post '/sessions'
+      expect(response).to have_http_status(401)
+    end
     it 'should report an error for missing email' do
       post '/sessions', email: nil, password: @password
       expect(response).to have_http_status(401)
       expect(json['error_message']).to eq('Invalid Email or Password')
-    end
-    it 'should report an error for missing parameters' do
-      post '/sessions'
-      expect(response).to have_http_status(500)
     end
     it 'should report an error for missing password' do
       post '/sessions', email: @user.email, password: nil

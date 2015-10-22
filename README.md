@@ -29,3 +29,7 @@ Running tests:
 ```sh
 $ bundle exec rspec spec
 ```
+
+#### Coverage requirements
+
+Coverage is required to be at least 100% or deployment will not occur.

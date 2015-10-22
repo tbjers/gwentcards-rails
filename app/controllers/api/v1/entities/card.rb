@@ -2,8 +2,6 @@ module API
   module V1
     module Entities
       class Card < BaseEntity
-        root 'cards', 'card'
-        expose :faction, if: { type: :full }, using: Faction, documentation: { type: 'faction', required: true }
         expose :name, documentation: { type: String, required: true }
         expose :slug, documentation: { type: String, required: true }
         expose :obtain, documentation: { type: String, required: true }

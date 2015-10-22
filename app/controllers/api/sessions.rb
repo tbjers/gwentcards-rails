@@ -34,7 +34,7 @@ module API
         else
           user.ensure_authentication_token!
           user.save
-          { token: user.authentication_token, email: user.email }
+          { token: user.authentication_token, email: user.email, role: user.role.name }
         end
       end
 

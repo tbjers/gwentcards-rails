@@ -17,6 +17,7 @@ In order to get up and running:
 
 ```sh
 $ bundle install
+$ bundle exec puma
 ```
 
 ### Testing

@@ -5,7 +5,8 @@ RSpec.describe 'API:V1:Authentication', type: :request do
   describe 'GET /v1/factions' do
     before :each do
       @password = Faker::Internet.password
-      @user = FactoryGirl.create(:user, password: @password)
+      @role = FactoryGirl.create(:role, name: 'registered')
+      @user = FactoryGirl.create(:user, password: @password, role: @role)
     end
 
     it 'should return a 401 with no access_token specified' do

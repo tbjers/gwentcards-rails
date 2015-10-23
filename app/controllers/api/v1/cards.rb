@@ -21,54 +21,50 @@ module API
 
         desc 'Create a new card', entity: Entities::Card
         params do
-          requires :card, type: Hash do
-            requires :faction_id, type: String, desc: 'Faction ID'
-            requires :name, type: String, desc: 'Card name'
-            optional :slug, type: String, desc: 'Identifier'
-            requires :obtain, type: String, desc: 'Method of getting card'
-            optional :territory, type: String, desc: 'Territory in which to find card'
-            optional :quest, type: String, desc: 'Quest in which card can be obtained'
-            optional :location, type: String, desc: 'How to obtain the card'
-            requires :starter, type: Boolean, desc: 'Included at start of game'
-          end
+          requires :faction_id, type: String, desc: 'Faction ID'
+          requires :name, type: String, desc: 'Card name'
+          optional :slug, type: String, desc: 'Identifier'
+          requires :obtain, type: String, desc: 'Method of getting card'
+          optional :territory, type: String, desc: 'Territory in which to find card'
+          optional :quest, type: String, desc: 'Quest in which card can be obtained'
+          optional :location, type: String, desc: 'How to obtain the card'
+          requires :starter, type: Boolean, desc: 'Included at start of game'
         end
         post do
           error!('401 Unauthorized', 401) unless admin?
           present Card.create(
-            faction: Faction.find(params[:card][:faction_id]),
-            name: params[:card][:name],
-            slug: params[:card][:slug],
-            obtain: params[:card][:obtain],
-            territory: params[:card][:territory],
-            quest: params[:card][:quest],
-            location: params[:card][:location],
-            starter: params[:card][:starter]
+            faction: Faction.find(params[:faction_id]),
+            name: params[:name],
+            slug: params[:slug],
+            obtain: params[:obtain],
+            territory: params[:territory],
+            quest: params[:quest],
+            location: params[:location],
+            starter: params[:starter]
           ), with: Entities::Card, type: entity_type
         end
 
         desc 'Update a card', entity: Entities::Card
         params do
-          requires :card, type: Hash do
-            requires :name, type: String, desc: 'Card name'
-            optional :slug, type: String, desc: 'Identifier'
-            requires :obtain, type: String, desc: 'Method of getting card'
-            optional :territory, type: String, desc: 'Territory in which to find card'
-            optional :quest, type: String, desc: 'Quest in which card can be obtained'
-            optional :location, type: String, desc: 'How to obtain the card'
-            requires :starter, type: Boolean, desc: 'Included at start of game'
-          end
+          requires :name, type: String, desc: 'Card name'
+          optional :slug, type: String, desc: 'Identifier'
+          requires :obtain, type: String, desc: 'Method of getting card'
+          optional :territory, type: String, desc: 'Territory in which to find card'
+          optional :quest, type: String, desc: 'Quest in which card can be obtained'
+          optional :location, type: String, desc: 'How to obtain the card'
+          requires :starter, type: Boolean, desc: 'Included at start of game'
         end
         put ':id' do
           error!('401 Unauthorized', 401) unless admin?
           card = Card.find(params[:id])
           card.update(
-            name: params[:card][:name],
-            slug: params[:card][:slug],
-            obtain: params[:card][:obtain],
-            territory: params[:card][:territory],
-            quest: params[:card][:quest],
-            location: params[:card][:location],
-            starter: params[:card][:starter]
+            name: params[:name],
+            slug: params[:slug],
+            obtain: params[:obtain],
+            territory: params[:territory],
+            quest: params[:quest],
+            location: params[:location],
+            starter: params[:starter]
           )
           present card, with: Entities::Card, type: entity_type
         end

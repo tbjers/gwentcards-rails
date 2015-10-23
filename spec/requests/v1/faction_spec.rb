@@ -32,7 +32,7 @@ RSpec.describe 'API:V1/factions', type: :request do
 
     it 'should create a new faction' do
       faction = FactoryGirl.build(:faction)
-      post '/v1/factions.json', access_token: @admin.authentication_token, faction: { name: faction.name }
+      post '/v1/factions.json', access_token: @admin.authentication_token, name: faction.name
       expect(response.content_type).to eq('application/json')
       expect(response).to be_success
       expect(json['name']).to eq(faction.name)
@@ -40,7 +40,7 @@ RSpec.describe 'API:V1/factions', type: :request do
 
     it 'updates a specific faction' do
       new_name = Faker::Lorem.sentence
-      put "/v1/factions/#{@faction.id}.json", access_token: @admin.authentication_token, faction: { name: new_name }
+      put "/v1/factions/#{@faction.id}.json", access_token: @admin.authentication_token, name: new_name
       expect(response).to be_success
       expect(json['name']).to eq(new_name)
     end

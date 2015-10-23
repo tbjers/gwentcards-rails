@@ -15,13 +15,11 @@ module API
 
         desc 'Create a new user', entity: Entities::User
         params do
-          requires :user, type: Hash do
-            requires :email, type: String, desc: 'User email'
-            requires :password, type: String, desc: 'User password'
-          end
+          requires :email, type: String, desc: 'User email'
+          requires :password, type: String, desc: 'User password'
         end
         post do
-          @user = User.new(email: params[:user][:email], password: params[:user][:password], password_confirmation: params[:user][:password])
+          @user = User.new(email: params[:email], password: params[:password], password_confirmation: params[:password])
           @user.save
           present @user, with: Entities::User, type: entity_type
         end

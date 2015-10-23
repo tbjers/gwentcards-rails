@@ -33,7 +33,7 @@ RSpec.describe 'API:V1/cards', type: :request do
 
     it 'should create a new card' do
       card = FactoryGirl.build(:card)
-      post '/v1/cards.json', access_token: @admin.authentication_token, card: { name: card.name, obtain: card.obtain, territory: card.territory, quest: card.quest, location: card.location, starter: card.starter, faction_id: @faction._id }
+      post '/v1/cards.json', access_token: @admin.authentication_token, name: card.name, obtain: card.obtain, territory: card.territory, quest: card.quest, location: card.location, starter: card.starter, faction_id: @faction._id
       expect(response.content_type).to eq('application/json')
       expect(response).to be_success
       expect(json['name']).to eq(card.name)
@@ -41,7 +41,7 @@ RSpec.describe 'API:V1/cards', type: :request do
 
     it 'updates a specific card' do
       new_name = Faker::Lorem.sentence
-      put "/v1/cards/#{@card.id}.json", access_token: @admin.authentication_token, card: { name: new_name, obtain: @card.obtain, territory: @card.territory, quest: @card.quest, location: @card.location, starter: @card.starter }
+      put "/v1/cards/#{@card.id}.json", access_token: @admin.authentication_token, name: new_name, obtain: @card.obtain, territory: @card.territory, quest: @card.quest, location: @card.location, starter: @card.starter
       expect(response).to be_success
       expect(json['name']).to eq(new_name)
       expect(json['obtain']).to eq(@card.obtain)
@@ -52,7 +52,7 @@ RSpec.describe 'API:V1/cards', type: :request do
     end
 
     it 'should create a new card with a different slug' do
-      post '/v1/cards.json', access_token: @admin.authentication_token, card: { name: @card.name, obtain: @card.obtain, territory: @card.territory, quest: @card.quest, location: @card.location, starter: @card.starter, faction_id: @faction._id }
+      post '/v1/cards.json', access_token: @admin.authentication_token, name: @card.name, obtain: @card.obtain, territory: @card.territory, quest: @card.quest, location: @card.location, starter: @card.starter, faction_id: @faction._id
       expect(response).to be_success
       expect(json['name']).to eq(@card.name)
       expect(json['slug']).to eq(@card.slug + '-1')

@@ -21,32 +21,28 @@ module API
 
         desc 'Create a new faction', entity: Entities::Faction
         params do
-          requires :faction, type: Hash do
-            requires :name, type: String, desc: 'Faction name'
-            optional :slug, type: String, desc: 'Identifier'
-          end
+          requires :name, type: String, desc: 'Faction name'
+          optional :slug, type: String, desc: 'Identifier'
         end
         post do
           error!('401 Unauthorized', 401) unless admin?
           present Faction.create(
-            name: params[:faction][:name],
-            slug: params[:faction][:slug]
+            name: params[:name],
+            slug: params[:slug]
           ), with: Entities::Faction, type: entity_type
         end
 
         desc 'Update a faction', entity: Entities::Faction
         params do
-          requires :faction, type: Hash do
-            requires :name, type: String, desc: 'Faction name'
-            optional :slug, type: String, desc: 'Identifier'
-          end
+          requires :name, type: String, desc: 'Faction name'
+          optional :slug, type: String, desc: 'Identifier'
         end
         put ':id' do
           error!('401 Unauthorized', 401) unless admin?
           faction = Faction.find(params[:id])
           faction.update(
-            name: params[:faction][:name],
-            slug: params[:faction][:slug]
+            name: params[:name],
+            slug: params[:slug]
           )
           present faction, with: Entities::Faction, type: entity_type
         end

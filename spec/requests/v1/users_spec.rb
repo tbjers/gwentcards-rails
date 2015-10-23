@@ -17,7 +17,7 @@ RSpec.describe 'API:V1/users', type: :request do
 
     it 'should create a new user' do
       email = Faker::Internet.email
-      post '/v1/users.json', access_token: @user.authentication_token, user: { email: email, password: Faker::Internet.password }
+      post '/v1/users.json', access_token: @user.authentication_token, email: email, password: Faker::Internet.password
       expect(response.content_type).to eq('application/json')
       expect(response).to be_success
       expect(json['email']).to eq(email)

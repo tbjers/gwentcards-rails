@@ -28,7 +28,7 @@ module API
           optional :territory, type: String, desc: 'Territory in which to find card'
           optional :quest, type: String, desc: 'Quest in which card can be obtained'
           optional :location, type: String, desc: 'How to obtain the card'
-          requires :starter, type: Boolean, desc: 'Included at start of game'
+          optional :starter, type: Boolean, desc: 'Included at start of game'
         end
         post do
           error!('401 Unauthorized', 401) unless admin?
@@ -52,7 +52,7 @@ module API
           optional :territory, type: String, desc: 'Territory in which to find card'
           optional :quest, type: String, desc: 'Quest in which card can be obtained'
           optional :location, type: String, desc: 'How to obtain the card'
-          requires :starter, type: Boolean, desc: 'Included at start of game'
+          optional :starter, type: Boolean, desc: 'Included at start of game'
         end
         put ':id' do
           error!('401 Unauthorized', 401) unless admin?

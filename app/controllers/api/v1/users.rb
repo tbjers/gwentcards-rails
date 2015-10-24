@@ -22,6 +22,11 @@ module API
           present @user, with: Entities::User, type: entity_type
         end
 
+        desc 'Return a list of cards for the current user', entity: Entities::Card
+        get 'cards' do
+          present current_user.cards, with: Entities::Card, type: entity_type
+        end
+
         desc 'Add a card to the current user', entity: Entities::User
         params do
           requires :card_id, type: String, desc: 'Card ID'

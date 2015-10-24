@@ -43,6 +43,14 @@ RSpec.describe 'API:V1/users', type: :request do
       expect(response).to be_success
     end
 
+    it 'should get the cards of the user' do
+      post "/v1/users/card/#{@card.id}.json", access_token: @user.authentication_token
+      expect(response).to be_success
+      get "/v1/users/cards.json", access_token: @user.authentication_token
+      expect(response).to be_success
+      expect(json.length).to be >= 1
+    end
+
     it 'should remove a card from a user' do
       delete "/v1/users/card/#{@card.id}.json", access_token: @user.authentication_token
       expect(response).to be_success

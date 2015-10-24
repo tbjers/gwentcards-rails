@@ -42,6 +42,7 @@ class User
   validates :email, presence: true
 
   belongs_to :role
+  has_and_belongs_to_many :cards, inverse_of: nil
 
   index({ email: 1 }, unique: true, drop_dups: true)
   index({ authentication_token: 1 }, unique: true, drop_dups: true)

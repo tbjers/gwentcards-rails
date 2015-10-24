@@ -17,6 +17,8 @@ module API
         optional :password, type: String, desc: 'User password'
       end
       post do
+        cache_control :private, :must_revalidate, max_age: 0
+
         email = params[:email]
         password = params[:password]
 
@@ -43,6 +45,8 @@ module API
         requires :access_token, type: String, desc: 'User access token'
       end
       delete do
+        cache_control :private, :must_revalidate, max_age: 0
+
         access_token = params[:access_token]
         user = User.find_by(authentication_token: access_token)
         if user.nil?

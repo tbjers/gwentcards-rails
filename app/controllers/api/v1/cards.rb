@@ -6,6 +6,7 @@ module API
       resource :cards do
         desc 'Return a list of cards', entity: Entities::Card
         get do
+          cache_control :private, :must_revalidate, max_age: 0
           if params[:faction_id]
             cards = Card.where(faction_id: params[:faction_id])
           else
@@ -16,6 +17,7 @@ module API
 
         desc 'Return a card', entity: Entities::Card
         get ':id' do
+          cache_control :private, :must_revalidate, max_age: 0
           present Card.find(params[:id]), with: Entities::Card, type: entity_type
         end
 
@@ -31,6 +33,7 @@ module API
           optional :starter, type: Boolean, desc: 'Included at start of game'
         end
         post do
+          cache_control :private, :must_revalidate, max_age: 0
           error!('401 Unauthorized', 401) unless admin?
           present Card.create(
             faction: Faction.find(params[:faction_id]),
@@ -55,6 +58,7 @@ module API
           optional :starter, type: Boolean, desc: 'Included at start of game'
         end
         put ':id' do
+          cache_control :private, :must_revalidate, max_age: 0
           error!('401 Unauthorized', 401) unless admin?
           card = Card.find(params[:id])
           card.update(
@@ -74,6 +78,7 @@ module API
           requires :id, type: String, desc: 'Card ID'
         end
         delete ':id' do
+          cache_control :private, :must_revalidate, max_age: 0
           error!('401 Unauthorized', 401) unless admin?
           Card.find(params[:id]).destroy
           {}
